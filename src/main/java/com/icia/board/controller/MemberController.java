@@ -23,14 +23,12 @@ public class MemberController {
 	@GetMapping("/")
 	public String home() {
 		log.info("home()");
-		
 		return "index";
 	}
 	
 	@GetMapping("loginForm")
 	public String loginForm() {
 		log.info("loginForm()");
-		
 		return "loginForm";
 	}
 	
@@ -40,7 +38,7 @@ public class MemberController {
 							RedirectAttributes rttr) {
 		log.info("loginProc()");
 		
-		return mServ.loginProc(member, session, rttr); 
+		return mServ.loginProc(member, session, rttr);
 	}
 	
 	@GetMapping("joinForm")
@@ -49,7 +47,7 @@ public class MemberController {
 		
 		return "joinForm";
 	}
-	
+
 //  idCheck는 BoardRestController로 이동함.
 //	@GetMapping("idCheck")
 //	@ResponseBody
@@ -72,14 +70,12 @@ public class MemberController {
 	@GetMapping("authUser")
 	public String authUser() {
 		log.info("authUser()");
-		
 		return "authUser";
 	}
 	
 	@GetMapping("pwdChange")
 	public String pwdChange() {
 		log.info("pwdChange()");
-		
 		return "pwdChange";
 	}
 	
@@ -88,8 +84,19 @@ public class MemberController {
 								HttpSession session,
 								RedirectAttributes rttr) {
 		log.info("pwdChangeProc()");
-		String view = mServ.pwdChangeProc(member, session, rttr);
-		
+		String view = mServ.pwdChangeProc(member, session, rttr);		
+		return view;
+	}
+	
+	@GetMapping("logout")
+	public String logout(HttpSession session, 
+						 RedirectAttributes rttr) {
+		log.info("logout()");
+		String view = mServ.logout(session, rttr);
 		return view;
 	}
 }
+
+
+
+

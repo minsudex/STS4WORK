@@ -9,10 +9,10 @@
 	
 	<select id="selectMember" parameterType="String"
 		resultType="MemberDto">
-		SELECT * FROM minfo WHERE m_id=#{mid}	
+		SELECT * FROM minfo WHERE m_id=#{mid}
 	</select>
 	
-	<select id="selectId" parameterType="String"
+	<select id="selectId" parameterType="String" 
 		resultType="Integer">
 		SELECT count(*) FROM member WHERE m_id=#{mid}
 	</select>
@@ -23,13 +23,21 @@
 			   #{m_birth},#{m_addr},#{m_phone},DEFAULT)
 	</insert>
 	
-	<select id="selectEmail" parameterType="String"
-		resultType="String">
-		SELECT m_email FROM member WHERE m_id=#{m_id}	
+	<select id="selectEmail" parameterType="String" resultType="String">
+		SELECT m_email FROM member WHERE m_id=#{m_id}
 	</select>
 	
 	<update id="updatePassword" parameterType="MemberDto">
 		UPDATE member SET m_pwd=#{m_pwd}
 		WHERE m_id=#{m_id}
 	</update>
+	
+	<update id="updateMemberPoint" parameterType="MemberDto">
+		UPDATE member SET m_point=#{m_point}
+		WHERE m_id=#{m_id}
+	</update>
 </mapper>
+
+
+
+

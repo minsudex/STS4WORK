@@ -36,6 +36,7 @@ public class MailService {
 	//인증코드 생성 메소드
 	public void createCode() {
 		log.info("createCode()");
+		
 		Random random = new Random();
 		StringBuffer key = new StringBuffer();
 		
@@ -44,20 +45,18 @@ public class MailService {
 			int index = random.nextInt(3);
 			
 			switch (index) {
-			case 0: 
-				key.append((char)(random.nextInt(26) + 97));//대문자
-				break;
-			case 1:
-				key.append((char)(random.nextInt(26) + 65));//소문자
-				break;
-			case 2:
-				key.append((char)(random.nextInt(9)));//숫자
-				
+				case 0: 
+					key.append((char)(random.nextInt(26) + 97));//대문자
+					break;
+				case 1:
+					key.append((char)(random.nextInt(26) + 65));//소문자
+					break;
+				case 2:
+					key.append((char)(random.nextInt(9) + 48));//숫자
 			}
 		}
 		
 		authNum = key.toString();
-		System.out.println(authNum);
 	}
 	
 	//메일 양식 생성 메소드
@@ -65,7 +64,7 @@ public class MailService {
 			throws MessagingException, UnsupportedEncodingException {
 		log.info("createEmailForm()");
 		
-		String setFrom = "gminsuf4@gmail.com";//mail setting에 설정한 메일 주소
+		String setFrom = "naver_id@naver.com";//mail setting에 설정한 메일 주소
 		String title = "인증 코드 전송";//메일 제목
 		
 		MimeMessage message = emailSender.createMimeMessage();
@@ -79,7 +78,6 @@ public class MailService {
 	
 	//Thymeleaf를 이용한 context(HTML, 메일 화면)를 설정하는 메소드
 	private String setContext() {
-		log.info("setContext()");
 		createCode();//인증 코드 생성
 		Context context = new Context();
 		context.setVariable("code", authNum);
@@ -96,7 +94,6 @@ public class MailService {
 		
 		try {
 			email = mDao.selectEmail(member.getM_id());
-			System.out.println(email);
 			if(email.equals(member.getM_email())) {
 				emailForm = createEmailForm(email);
 				
@@ -108,9 +105,7 @@ public class MailService {
 				session.setAttribute("m_id", member.getM_id());
 			}
 			else {
-				System.out.println(email);
 				res = "fail";
-				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -136,3 +131,9 @@ public class MailService {
 		return res;
 	}
 }//class end
+
+
+
+
+
+

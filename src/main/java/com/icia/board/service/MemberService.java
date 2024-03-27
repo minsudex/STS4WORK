@@ -32,7 +32,7 @@ public class MemberService {
 		
 		String encPwd = mDao.selectPassword(member.getM_id());
 		
-		if(encPwd != null) {//member가 존재함
+		if(encPwd != null) { //member가 존재함
 			//matches(평문-사용자입력값, 암호문-DB저장값)
 			if(pEncoder.matches(member.getM_pwd(), encPwd)) {
 				//로그인 성공!
@@ -42,15 +42,15 @@ public class MemberService {
 				//로그인 성공 시 이동할 화면(view) 지정
 				view = "redirect:boardList?pageNum=1";
 				msg = "로그인 성공";
-			} 
+			}
 			else {
 				msg = "비밀번호가 틀립니다.";
-				view = "redirect:loginForm"; 
+				view = "redirect:loginForm";
 			}
-		} 
-		else {//member가 없음
+		}
+		else { //member가 없음
 			msg = "존재하지 않는 아이디입니다.";
-		    view = "redirect:loginForm";
+			view = "redirect:loginForm";
 		}
 		
 		rttr.addFlashAttribute("msg", msg);
@@ -72,7 +72,7 @@ public class MemberService {
 		return result;
 	}
 	
-	public String memberJoin(MemberDto member, 
+	public String memberJoin(MemberDto member,
 							 RedirectAttributes rttr) {
 		log.info("memberJoin()");
 		//가입 성공 시 첫페이지(또는 로그인페이지)로, 실패 시 가입 페이지로 이동
@@ -110,14 +110,14 @@ public class MemberService {
 		String encPwd = pEncoder.encode(member.getM_pwd());
 		
 		if(m_id != null) {
-			member.setM_id(m_id);
+			member.setM_id(m_id);			
 			member.setM_pwd(encPwd);
 			
 			try {
 				mDao.updatePassword(member);
 				msg = "비밀번호 변경 성공";
 				view = "redirect:loginForm";
-			}catch (Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 				msg = "비밀번호 변경 실패";
 				view = "redirect:pwdChange";
@@ -128,5 +128,17 @@ public class MemberService {
 		
 		return view;
 	}
+
+	public String logout(HttpSession session, RedirectAttributes rttr) {
+		log.info("logout()");
+		session.invalidate();
+		rttr.addFlashAttribute("msg", "로그아웃되었습니다.");
+		return "redirect:/";
+	}
 	
 }//class end
+
+
+
+
+

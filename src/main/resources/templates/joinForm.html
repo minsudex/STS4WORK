@@ -12,7 +12,7 @@
             if(m != null){
                 alert(m);
             }
-        })
+        });
     </script>
 </head>
 <body>
@@ -61,9 +61,9 @@
     //id 중복 체크
     let ck = false;
     
-    function idcheck() {
+    function idcheck(){
     	let id = $("#mid").val();
-    	if(id == "") {
+    	if(id == ""){
     		alert("아이디를 입력하세요.");
     		$("#mid").focus();
     		return;//여기서 함수 종료.
@@ -79,7 +79,7 @@
     		data: sendObj,
     		success: (res) => {
     			//console.log(res);
-    			if(res == "ok") {
+    			if(res == "ok"){
     				alert("사용 가능한 아이디입니다.");
     				ck = true;
     			} else {
@@ -98,7 +98,7 @@
     
     function check(){
     	//id 중복체크 여부 확인
-    	if(ck == false) {
+    	if(ck == false){
     		alert("아이디 중복 확인을 해주세요.");
     		return false;
     	}
@@ -109,15 +109,21 @@
     	
     	let length = jfrm.length - 1;
     	
-    	for(let i = 0; i < length; i++) {
-    		if(jfrm[i].value == "" || jfrm[i] == null) {
+    	for(let i = 0; i < length; i++){
+    		if(jfrm[i].value == "" || jfrm[i] == null){
     			alert(`${jfrm[i].title} 입력!`);
     			jfrm[i].focus();
     			return false;
-    		}	
+    		}
     	}
     	
     	return true;
     }
 </script>
 </html>
+
+
+
+
+
+

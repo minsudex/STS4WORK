@@ -16,3 +16,7 @@ public class MemberDto {
 	private int m_point;
 	private String g_name;//등급명 저장 변수(minfo 뷰용 변수)
 }
+
+
+
+
